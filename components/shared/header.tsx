@@ -6,6 +6,7 @@ import Logo from "/public/logo.png";
 import Link from "next/link";
 import { Button } from "../ui";
 import { ArrowRight, ShoppingCart, User } from "lucide-react";
+import { SearchInput } from "./search-input";
 
 interface Props {
   className?: string;
@@ -24,7 +25,10 @@ export const Header: React.FC<Props> = ({ className }) => {
             </span>
           </div>
         </Link>
-        {/* Search */}
+
+        <div className="mx-10 flex-1">
+          <SearchInput />
+        </div>
 
         <div className="flex items-center gap-3">
           <Button variant="outline" className="flex items-center gap-1">
