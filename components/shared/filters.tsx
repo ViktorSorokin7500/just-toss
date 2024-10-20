@@ -1,5 +1,5 @@
 "use client";
-import React, { use } from "react";
+import React from "react";
 import { cn } from "@/lib/utils";
 import { SortPopup } from "./sort-popup";
 import { Input } from "../ui";
@@ -7,67 +7,27 @@ import { RangeSlider } from "./range-slider";
 import { CheckboxFilterGroup } from "./checkbox-filter-group";
 import { useFilterData } from "@/hooks/use-filter-data";
 import { mapItems } from "@/lib/formulas";
-import qs from "qs";
-import { useRouter, useSearchParams } from "next/navigation";
-
-interface PriceProps {
-  priceFrom?: number;
-  priceTo?: number;
-}
+import { useFilter } from "@/hooks/use-filter";
 
 interface Props {
   className?: string;
 }
 
 export const Filters: React.FC<Props> = ({ className }) => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
   const { effects, terpenes, types, loading } = useFilterData();
-  const [sortBy, setSortBy] = React.useState<string | undefined>(
-    searchParams.get("sortBy") || undefined
-  );
-  const [selectedFilters, setSelectedFilters] = React.useState({
-    terpenes: searchParams.get("terpenes")?.split(",") || ([] as string[]),
-    effects: searchParams.get("effects")?.split(",") || ([] as string[]),
-    types: searchParams.get("types")?.split(",") || ([] as string[]),
-  });
-
-  const [prices, setPrices] = React.useState<PriceProps>({
-    priceFrom: Number(searchParams.get("priceFrom")) || undefined,
-    priceTo: Number(searchParams.get("priceTo")) || undefined,
-  });
 
   const effectItems = mapItems(effects);
   const terpeneItems = mapItems(terpenes);
   const typeItems = mapItems(types);
 
-  const updateSelectedFilters = (
-    filterName: keyof typeof selectedFilters,
-    selectedValues: string[]
-  ) => {
-    setSelectedFilters((prev) => ({
-      ...prev,
-      [filterName]: selectedValues,
-    }));
-  };
-
-  const updatePrice = (name: keyof PriceProps, value: number) => {
-    setPrices((prev) => ({ ...prev, [name]: value }));
-  };
-
-  React.useEffect(() => {
-    const filters = {
-      ...prices,
-      sortBy,
-      types: selectedFilters.types,
-      effects: selectedFilters.effects,
-      terpenes: selectedFilters.terpenes,
-    };
-
-    const query = qs.stringify(filters, { arrayFormat: "comma" });
-
-    router.push(`?${query}`, { scroll: false });
-  }, [prices, sortBy, selectedFilters, router]);
+  const {
+    sortBy,
+    setSortBy,
+    selectedFilters,
+    updateSelectedFilters,
+    prices,
+    updatePrice,
+  } = useFilter();
 
   return (
     <div className={cn(className)}>
