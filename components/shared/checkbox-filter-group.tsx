@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import { cn } from "@/lib/utils";
 import { FilterCheckbox, FilterCheckBoxProps } from "./filter-checkbox";
@@ -11,7 +10,7 @@ interface Props {
   items: Item[];
   limit?: number;
   searchInputPlaceholder?: string;
-  onChange?: (values: string[]) => void;
+  onChange: (selectedValues: string[]) => void;
   defaultValues?: string[];
   loading: boolean;
   className?: string;
@@ -31,6 +30,19 @@ export const CheckboxFilterGroup: React.FC<Props> = ({
   const [searchValue, setSearchValue] = React.useState("");
   const defaultItems = items.slice(0, limit);
 
+  const [checkedValues, setCheckedValues] = React.useState<string[]>(
+    defaultValues || []
+  );
+
+  const toggleCheckbox = (value: string) => {
+    const newCheckedValues = checkedValues.includes(value)
+      ? checkedValues.filter((v) => v !== value)
+      : [...checkedValues, value];
+
+    setCheckedValues(newCheckedValues);
+    onChange(newCheckedValues);
+  };
+
   if (loading) {
     return (
       <div className={cn(className)}>
@@ -39,7 +51,7 @@ export const CheckboxFilterGroup: React.FC<Props> = ({
         {...Array(limit)
           .fill(0)
           .map((_, i) => (
-            <Skeleton key={i} className="mb-4 h-6 rounded-[8px]" />
+            <Skeleton key={i} className="mb-3 h-6 rounded-[8px]" />
           ))}
       </div>
     );
@@ -75,8 +87,8 @@ export const CheckboxFilterGroup: React.FC<Props> = ({
             key={i}
             text={item.text}
             value={item.value}
-            checked={false}
-            onCheckedChange={(ids) => console.log(ids)}
+            checked={checkedValues.includes(item.value)}
+            onCheckedChange={() => toggleCheckbox(item.value)}
           />
         ))}
       </div>
