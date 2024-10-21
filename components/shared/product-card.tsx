@@ -27,7 +27,12 @@ export const ProductCard: React.FC<Props> = ({
   className,
 }) => {
   return (
-    <div className={cn(className)}>
+    <div
+      className={cn(
+        className,
+        "shadow-lg hover:shadow rounded bg-gray-50 transition-all duration-300 hover:scale-105"
+      )}
+    >
       <Link href={`/products/${id}`}>
         <div className="flex justify-center p-6 bg-green-50 rounded-lg h-[260px]">
           <img
@@ -37,33 +42,35 @@ export const ProductCard: React.FC<Props> = ({
           />
         </div>
 
-        <Title
-          text={name}
-          size="sm"
-          className="mb-1 mt-3 font-bold text-center"
-        />
+        <div className="p-2">
+          <Title
+            text={name}
+            size="sm"
+            className="mb-1 mt-3 font-bold text-center"
+          />
 
-        <div className="flex justify-between">
+          <div className="flex justify-between">
+            <p>
+              <b>Type:</b> {type}
+            </p>
+            <p>
+              <b>THC:</b> {thc}%
+            </p>
+          </div>
           <p>
-            <b>Type:</b> {type}
+            <b>Terpene:</b> {terpene}
           </p>
-          <p>
-            <b>THC:</b> {thc}
-          </p>
-        </div>
-        <p>
-          <b>Terpene:</b> {terpene}
-        </p>
 
-        <div className="flex justify-between items-center mt-4">
-          <span className="text-[20px]">
-            from <b>${price}</b>
-          </span>
+          <div className="flex justify-between items-center mt-4">
+            <span className="text-[20px]">
+              from <b>${price.toFixed(2)}</b>
+            </span>
 
-          <Button variant="secondary" className="text-base font-bold">
-            <Plus size={20} />
-            Add
-          </Button>
+            <Button className="text-base font-bold">
+              <Plus size={20} />
+              Add
+            </Button>
+          </div>
         </div>
       </Link>
     </div>

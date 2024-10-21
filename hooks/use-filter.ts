@@ -12,6 +12,7 @@ interface QueryFilter extends PriceProps {
   terpenes?: string[];
   effects?: string[];
   types?: string[];
+  page?: string;
 }
 
 export const useFilter = () => {
@@ -21,6 +22,7 @@ export const useFilter = () => {
     string
   >;
 
+  const page = parseInt(searchParams.get("page") || "", 10) || undefined;
   const [sortBy, setSortBy] = React.useState<string | undefined>(
     searchParams.get("sortBy") || undefined
   );
@@ -39,6 +41,7 @@ export const useFilter = () => {
     const filters = {
       ...prices,
       sortBy,
+      page,
       types: selectedFilters.types,
       effects: selectedFilters.effects,
       terpenes: selectedFilters.terpenes,
@@ -47,7 +50,7 @@ export const useFilter = () => {
     const query = qs.stringify(filters, { arrayFormat: "comma" });
 
     router.push(`?${query}`, { scroll: false });
-  }, [prices, sortBy, selectedFilters, router]);
+  }, [prices, page, sortBy, selectedFilters, router]);
 
   const updateSelectedFilters = (
     filterName: keyof typeof selectedFilters,
