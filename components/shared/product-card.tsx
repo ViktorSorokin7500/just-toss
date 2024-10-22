@@ -33,7 +33,7 @@ export const ProductCard: React.FC<Props> = ({
         "shadow-lg hover:shadow rounded bg-gray-50 transition-all duration-300 hover:scale-105"
       )}
     >
-      <Link href={`/products/${id}`}>
+      <Link href={`/product/${id}`}>
         <div className="flex justify-center p-6 bg-green-50 rounded-lg h-[260px]">
           <img
             src={imageUrl}

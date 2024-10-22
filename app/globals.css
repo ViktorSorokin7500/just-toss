@@ -84,3 +84,7 @@ html {
 #nprogress .spinner-icon {
   @apply border-t-primary border-l-primary !important;
 }
+
+.text-shadow {
+  text-shadow: 1px 1px 2px black;
+}

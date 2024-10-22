@@ -1,3 +1,5 @@
+export * from "./modal";
+
 export { Header } from "./header";
 export { Container } from "./container";
 export { Title } from "./title";
@@ -9,3 +11,5 @@ export { CheckboxFilterGroup } from "./checkbox-filter-group";
 export { ProductCard } from "./product-card";
 export { SearchInput } from "./search-input";
 export { Pagination } from "./pagination";
+export { ProductFullInfo } from "./product-full-info";
+export { EffectsList } from "./effects-list";
