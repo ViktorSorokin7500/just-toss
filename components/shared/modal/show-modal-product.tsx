@@ -44,11 +44,11 @@ export const ShowModalProduct: React.FC<Props> = ({ className, product }) => {
   const router = useRouter();
   return (
     <Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
-      <DialogTitle>{product.name}</DialogTitle>
+      {/* <DialogTitle>{product.name}</DialogTitle> */}
       <DialogContent
         className={cn(
           className,
-          "p-0 max-w-[1060px] min-h-[500px] bg-white overflow-hidden"
+          "p-0 max-w-[1060px] min-h-[500px] bg-stone-500 overflow-hidden"
         )}
       >
         <ProductFullInfo product={product} onSubmit={() => router.back()} />

@@ -14,7 +14,12 @@ interface Props {
 
 export const EffectsList: React.FC<Props> = ({ className, effects }) => {
   return (
-    <div className={cn(className, "flex flex-wrap gap-1 mx-auto")}>
+    <div
+      className={cn(
+        className,
+        "flex flex-wrap gap-1 mx-auto p-2 bg-stone-600 shadow rounded-lg justify-around"
+      )}
+    >
       {effects
         .sort((a, b) => b.value - a.value)
         .map((effect, i) => {

@@ -22,9 +22,9 @@ export const ProductFullInfo: React.FC<Props> = ({
 
   return (
     <div
-      className={cn(className, "flex justify-center items-center px-20 gap-20")}
+      className={cn(className, "flex justify-center items-center pr-16 gap-4")}
     >
-      <div className="flex flex-col justify-center items-center gap-8">
+      <div className="flex flex-col justify-center items-center gap-8 bg-gray-50 h-full px-16">
         <div className="flex justify-center p-6 bg-green-50 rounded-full size-[320px]">
           <img
             src={product.imageUrl}
@@ -34,9 +34,9 @@ export const ProductFullInfo: React.FC<Props> = ({
         </div>
         <Button onClick={onSubmit}>Add to cart</Button>
       </div>
-      <div className="flex-1 flex flex-col gap-2">
+      <div className="flex-1 flex flex-col gap-2 text-white text-shadow">
         <Title text={product.name} size="lg" className="font-extrabold" />
-        <span className="text-gray-600 text-[14px]">{product.description}</span>
+        <span className="text-[14px]">{product.description}</span>
         <div className="flex flex-wrap gap-1 justify-between">
           <span>
             <b>THC level:</b> {product.thcLevel}%
