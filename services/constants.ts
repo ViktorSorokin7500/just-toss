@@ -3,4 +3,5 @@ export enum ApiRoutes {
   EFFECTS = "effects",
   TYPES = "types",
   TERPENES = "terpenes",
+  CART = "cart",
 }

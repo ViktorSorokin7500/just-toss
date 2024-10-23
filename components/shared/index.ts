@@ -13,3 +13,8 @@ export { SearchInput } from "./search-input";
 export { Pagination } from "./pagination";
 export { ProductFullInfo } from "./product-full-info";
 export { EffectsList } from "./effects-list";
+export { CartButton } from "./cart-button";
+export { CartDrawer } from "./cart-drawer";
+export { CountButton } from "./count-button";
+export { CountButtonIcon } from "./count-button-icon";
+export { CartDrawerItem } from "./cart-drawer-item";
