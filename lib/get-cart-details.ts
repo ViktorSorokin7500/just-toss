@@ -27,12 +27,10 @@ export const getCartDetails = (data: CartDTO): ReturnProps => {
     imageUrl: item.product.imageUrl,
     thc: item.product.thcLevel,
 
-    price: item.product.price,
+    price: item.product.price * item.quantity,
 
-    terpene: item.terpene.name,
-    type: item.type.name,
-
-    totalAmount: item.product.price * item.quantity,
+    terpene: item.product.terpene.name,
+    type: item.product.type.name,
   }));
 
   return {

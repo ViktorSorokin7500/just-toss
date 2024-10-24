@@ -1,9 +1,11 @@
+"use client";
 import React from "react";
 import { cn } from "@/lib/utils";
 import { ProductProps } from "./modal/show-modal-product";
 import { Title } from "./title";
 import { EffectsList } from "./effects-list";
 import { Button } from "../ui";
+import { useCartStore } from "@/store/cart";
 
 interface Props {
   className?: string;
@@ -16,7 +18,11 @@ export const ProductFullInfo: React.FC<Props> = ({
   product,
   onSubmit: _onSubmit,
 }) => {
+  const addCartItem = useCartStore((state) => state.addCartItem);
   const onSubmit = () => {
+    addCartItem({
+      productId: product.id,
+    });
     _onSubmit();
   };
 

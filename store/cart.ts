@@ -1,5 +1,6 @@
 import { getCartDetails } from "@/lib/get-cart-details";
 import { Api } from "@/services/api-client";
+import { CreateCartItemValues } from "@/services/dto/cart.dto";
 import { create } from "zustand";
 
 export type ICartItem = {
@@ -9,6 +10,10 @@ export type ICartItem = {
   name: string;
   imageUrl: string;
   price: number;
+
+  thc: string;
+  terpene: string;
+  type: string;
 };
 
 export interface CartState {
@@ -42,9 +47,42 @@ export const useCartStore = create<CartState>((set, get) => ({
     }
   },
 
-  updateItemQuantity: async () => {},
+  updateItemQuantity: async (id: number, quantity: number) => {
+    try {
+      set({ loading: true, error: false });
+      const data = await Api.cart.updateItemQuantity(id, quantity);
+      set(getCartDetails(data));
+    } catch (error) {
+      console.log("updateItemQuantity =>", error);
+      set({ error: true });
+    } finally {
+      set({ loading: false });
+    }
+  },
 
-  addCartItem: async () => {},
+  removeCartItem: async (id: number) => {
+    try {
+      set({ loading: true, error: false });
+      const data = await Api.cart.removeCartItem(id);
+      set(getCartDetails(data));
+    } catch (error) {
+      console.log("removeCartItem =>", error);
+      set({ error: true });
+    } finally {
+      set({ loading: false });
+    }
+  },
 
-  removeCartItem: async () => {},
+  addCartItem: async (values: CreateCartItemValues) => {
+    try {
+      set({ loading: true, error: false });
+      const data = await Api.cart.addCartItem(values);
+      set(getCartDetails(data));
+    } catch (error) {
+      console.log("removeCartItem =>", error);
+      set({ error: true });
+    } finally {
+      set({ loading: false });
+    }
+  },
 }));

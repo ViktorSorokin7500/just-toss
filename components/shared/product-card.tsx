@@ -1,9 +1,11 @@
+"use client";
 import React from "react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Title } from "./title";
 import { Button } from "../ui";
 import { Plus } from "lucide-react";
+import { useCartStore } from "@/store/cart";
 
 interface Props {
   id: number;
@@ -26,6 +28,8 @@ export const ProductCard: React.FC<Props> = ({
   thc,
   className,
 }) => {
+  const addCartItem = useCartStore((state) => state.addCartItem);
+
   return (
     <div
       className={cn(
