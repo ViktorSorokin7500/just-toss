@@ -6,6 +6,7 @@ import { Title } from "./title";
 import { EffectsList } from "./effects-list";
 import { Button } from "../ui";
 import { useCartStore } from "@/store/cart";
+import toast from "react-hot-toast";
 
 interface Props {
   className?: string;
@@ -20,10 +21,16 @@ export const ProductFullInfo: React.FC<Props> = ({
 }) => {
   const addCartItem = useCartStore((state) => state.addCartItem);
   const onSubmit = () => {
-    addCartItem({
-      productId: product.id,
-    });
-    _onSubmit();
+    try {
+      addCartItem({
+        productId: product.id,
+      });
+      toast.success("Product added to cart");
+      _onSubmit();
+    } catch (error) {
+      toast.error("Failed to add product to cart");
+      console.log("product-full-info", error);
+    }
   };
 
   return (

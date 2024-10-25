@@ -1,20 +1,7 @@
-import { getCartDetails } from "@/lib/get-cart-details";
+import { getCartDetails, ICartItem } from "@/lib/get-cart-details";
 import { Api } from "@/services/api-client";
 import { CreateCartItemValues } from "@/services/dto/cart.dto";
 import { create } from "zustand";
-
-export type ICartItem = {
-  id: number;
-  quantity: number;
-
-  name: string;
-  imageUrl: string;
-  price: number;
-
-  thc: string;
-  terpene: string;
-  type: string;
-};
 
 export interface CartState {
   loading: boolean;
@@ -62,7 +49,13 @@ export const useCartStore = create<CartState>((set, get) => ({
 
   removeCartItem: async (id: number) => {
     try {
-      set({ loading: true, error: false });
+      set((state) => ({
+        loading: true,
+        error: false,
+        items: state.items.map((item) =>
+          item.id === id ? { ...item, disabled: true } : item
+        ),
+      }));
       const data = await Api.cart.removeCartItem(id);
       set(getCartDetails(data));
     } catch (error) {

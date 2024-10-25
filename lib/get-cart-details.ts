@@ -3,6 +3,7 @@ import { CartDTO } from "@/services/dto/cart.dto";
 export type ICartItem = {
   id: number;
   quantity: number;
+  disabled?: boolean;
 
   name: string;
   imageUrl: string;

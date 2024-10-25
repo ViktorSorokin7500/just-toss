@@ -6,7 +6,6 @@ import * as CartItem from "./cart-item-details";
 import { CartItemProps } from "./cart-item-details/cart-item-details.types";
 import { CountButton } from "./count-button";
 import { Trash2Icon } from "lucide-react";
-import { on } from "events";
 
 interface Props extends CartItemProps {
   onClickCountUpdate?: (type: "plus" | "minus") => void;
@@ -21,11 +20,16 @@ export const CartDrawerItem: React.FC<Props> = ({
   imageUrl,
   quantity,
   details,
+  disabled,
   onClickCountUpdate,
   onClickRemove,
 }) => {
   return (
-    <div className={cn(className, "flex bg-white p-5 gap-6")}>
+    <div
+      className={cn(className, "flex bg-white p-5 gap-6", {
+        "grayscale pointer-events-none": disabled,
+      })}
+    >
       <CartItem.Image src={imageUrl} />
 
       <div className="flex-1">

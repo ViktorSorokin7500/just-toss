@@ -2,7 +2,7 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Dialog } from "@/components/ui";
-import { DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { DialogContent } from "@/components/ui/dialog";
 import { useRouter } from "next/navigation";
 import { ProductFullInfo } from "../product-full-info";
 
@@ -44,7 +44,6 @@ export const ShowModalProduct: React.FC<Props> = ({ className, product }) => {
   const router = useRouter();
   return (
     <Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
-      {/* <DialogTitle>{product.name}</DialogTitle> */}
       <DialogContent
         className={cn(
           className,
