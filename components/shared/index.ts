@@ -18,3 +18,5 @@ export { CartDrawer } from "./cart-drawer";
 export { CountButton } from "./count-button";
 export { CountButtonIcon } from "./count-button-icon";
 export { CartDrawerItem } from "./cart-drawer-item";
+export { ProductMainInfo } from "./product-main-info";
+export { RecommendProducts } from "./recommend-products";

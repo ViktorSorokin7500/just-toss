@@ -29,7 +29,7 @@ export const ProductFullInfo: React.FC<Props> = ({
       _onSubmit();
     } catch (error) {
       toast.error("Failed to add product to cart");
-      console.log("product-full-info", error);
+      console.log("product-full-info =>", error);
     }
   };
 
@@ -65,6 +65,9 @@ export const ProductFullInfo: React.FC<Props> = ({
           </span>
         </div>
         <EffectsList effects={product.effects} />
+        <Button className="mt-4" onClick={() => window.location.reload()}>
+          Show more
+        </Button>
       </div>
     </div>
   );
