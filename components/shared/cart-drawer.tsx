@@ -19,6 +19,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { Title } from "./title";
 import EmptyBox from "/public/assets/images/empty-box.png";
+import { useCart } from "@/hooks/use-cart";
 
 interface Props {
   className?: string;
@@ -27,18 +28,7 @@ interface Props {
 export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({
   children,
 }) => {
-  const {
-    items,
-    fetchCartItems,
-    updateItemQuantity,
-    totalAmount,
-    removeCartItem,
-  } = useCartStore((state) => state);
-
-  React.useEffect(() => {
-    fetchCartItems();
-  }, []);
-
+  const { items, updateItemQuantity, totalAmount, removeCartItem } = useCart();
   const onClickCountUpdate = (
     id: number,
     quantity: number,
@@ -126,7 +116,7 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({
                     </span>
                   </div>
 
-                  <Link href="/cart">
+                  <Link href="/checkout">
                     <Button type="submit" className="w-full h-12 text-base">
                       Order
                       <ArrowRight className="w-5 ml-2" />

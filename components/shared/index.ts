@@ -1,4 +1,5 @@
 export * from "./modal";
+export * from "./checkout";
 
 export { Header } from "./header";
 export { Container } from "./container";
@@ -20,3 +21,5 @@ export { CountButtonIcon } from "./count-button-icon";
 export { CartDrawerItem } from "./cart-drawer-item";
 export { ProductMainInfo } from "./product-main-info";
 export { RecommendProducts } from "./recommend-products";
+export { WhiteBlock } from "./white-block";
+export { CheckoutItemDetails } from "./checkout-item-details";
