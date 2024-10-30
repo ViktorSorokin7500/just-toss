@@ -2,39 +2,77 @@
 import React from "react";
 import {
   CheckoutDeliveryDetails,
+  CheckoutPersonalForm,
   CheckoutTotalAmount,
   CheckoutYourCart,
-  WhiteBlock,
 } from "@/components/shared";
-import { Input } from "@/components/ui";
+import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  checkoutFormSchema,
+  CheckoutFormValues,
+} from "./form/schemas/checkout-form-schema";
+import { useCart } from "@/hooks/use-cart";
+import { cn } from "@/lib/utils";
+import { createOrder } from "@/app/actions";
+import toast from "react-hot-toast";
 
 interface Props {
   className?: string;
 }
 
 export const CheckoutInfo: React.FC<Props> = () => {
+  const [submitting, setSubmitting] = React.useState(false);
+
+  const form = useForm<CheckoutFormValues>({
+    resolver: zodResolver(checkoutFormSchema),
+    defaultValues: {
+      email: "",
+      firstName: "",
+      lastName: "",
+      phone: "",
+      address: "",
+      city: "",
+      state: "",
+      country: "",
+      comment: "",
+    },
+  });
+
+  const onSubmit: SubmitHandler<CheckoutFormValues> = async (data) => {
+    try {
+      setSubmitting(true);
+      await createOrder(data);
+      toast.success("Order created successfully, check your email");
+
+      location.href = "/";
+    } catch (error) {
+      console.log("checkout-info =>", error);
+      toast.error("Failed to add product to cart");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const { loading } = useCart();
+
   return (
-    <div className="flex gap-10">
-      <div className="flex flex-col gap-10 flex-1 mb-20">
-        <CheckoutYourCart />
-
-        <WhiteBlock title="2. Personal details">
-          <div className="grid grid-cols-2 gap-5">
-            <Input name="name" placeholder="Name" className="text-base" />
-            <Input
-              name="lastname"
-              placeholder="Lastname"
-              className="text-base"
+    <FormProvider {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+        <div className="flex gap-10">
+          <div className="flex flex-col gap-10 flex-1 mb-20">
+            <CheckoutYourCart />
+            <CheckoutPersonalForm
+              className={cn({ "opacity-40 pointer-events-none": loading })}
             />
-            <Input name="email" placeholder="Email" className="text-base" />
-            <Input name="phone" placeholder="Phone" className="text-base" />
+            <CheckoutDeliveryDetails
+              className={cn({ "opacity-40 pointer-events-none": loading })}
+            />
           </div>
-        </WhiteBlock>
 
-        <CheckoutDeliveryDetails />
-      </div>
-
-      <CheckoutTotalAmount />
-    </div>
+          <CheckoutTotalAmount submitting={submitting} />
+        </div>
+      </form>
+    </FormProvider>
   );
 };

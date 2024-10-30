@@ -2,15 +2,15 @@ import React from "react";
 import { WhiteBlock } from "../white-block";
 import { CheckoutItemDetails } from "../checkout-item-details";
 import { ArrowRight, Package, Percent, Truck } from "lucide-react";
-import { Button } from "@/components/ui";
+import { Button, Skeleton } from "@/components/ui";
 import { useCart } from "@/hooks/use-cart";
 
 interface Props {
-  className?: string;
+  submitting?: boolean;
 }
 
-export const CheckoutTotalAmount: React.FC<Props> = ({ className }) => {
-  const { totalAmount } = useCart();
+export const CheckoutTotalAmount: React.FC<Props> = ({ submitting }) => {
+  const { totalAmount, loading } = useCart();
   const productPrice = totalAmount * 0.8;
   const tax = totalAmount * 0.2;
   const delivery = totalAmount > 20 ? 0 : 2;
@@ -19,16 +19,20 @@ export const CheckoutTotalAmount: React.FC<Props> = ({ className }) => {
       <WhiteBlock className="p-6 top-4 sticky">
         <div className="flex flex-col gap-1">
           <span className="text-xl">Total:</span>
-          <div className="flex flex-col">
-            <span className="text-[34px] font-extrabold">
-              ${(totalAmount + delivery).toFixed(2)}
-            </span>
-            {totalAmount < 20 && (
-              <span className="text-sm text-gray-400">
-                ${totalAmount.toFixed(2)} + ${delivery.toFixed(2)}
+          {loading ? (
+            <Skeleton className="h-[71px]" />
+          ) : (
+            <div className="flex flex-col h-[71px]">
+              <span className="text-[34px] font-extrabold">
+                ${(totalAmount + delivery).toFixed(2)}
               </span>
-            )}
-          </div>
+              {totalAmount < 20 && (
+                <span className="text-sm text-gray-400">
+                  ${totalAmount.toFixed(2)} + ${delivery.toFixed(2)}
+                </span>
+              )}
+            </div>
+          )}
         </div>
 
         <CheckoutItemDetails
@@ -60,6 +64,7 @@ export const CheckoutTotalAmount: React.FC<Props> = ({ className }) => {
         />
 
         <Button
+          loading={submitting}
           type="submit"
           className="w-full h-14 rounded-2xl mt-6 text-base font-bold"
         >
