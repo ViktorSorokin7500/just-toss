@@ -16,6 +16,8 @@ import { useCart } from "@/hooks/use-cart";
 import { cn } from "@/lib/utils";
 import { createOrder } from "@/app/actions";
 import toast from "react-hot-toast";
+import { useSession } from "next-auth/react";
+import { Api } from "@/services/api-client";
 
 interface Props {
   className?: string;
@@ -23,6 +25,7 @@ interface Props {
 
 export const CheckoutInfo: React.FC<Props> = () => {
   const [submitting, setSubmitting] = React.useState(false);
+  const { data: session } = useSession();
 
   const form = useForm<CheckoutFormValues>({
     resolver: zodResolver(checkoutFormSchema),
@@ -38,6 +41,21 @@ export const CheckoutInfo: React.FC<Props> = () => {
       comment: "",
     },
   });
+
+  React.useEffect(() => {
+    async function fetchUserInfo() {
+      const data = await Api.auth.getMe();
+      const [firstName, lastName] = data.fullName.split(" ");
+
+      form.setValue("firstName", firstName);
+      form.setValue("lastName", lastName);
+      form.setValue("email", data.email);
+    }
+
+    if (session) {
+      fetchUserInfo();
+    }
+  }, [session]);
 
   const onSubmit: SubmitHandler<CheckoutFormValues> = async (data) => {
     try {

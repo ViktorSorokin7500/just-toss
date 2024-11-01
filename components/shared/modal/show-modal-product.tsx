@@ -43,15 +43,15 @@ interface Props {
 export const ShowModalProduct: React.FC<Props> = ({ className, product }) => {
   const router = useRouter();
   return (
-    <Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
-      <DialogContent
+    <Dialog.Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
+      <Dialog.DialogContent
         className={cn(
           className,
           "p-0 max-w-[1060px] min-h-[500px] bg-stone-500 overflow-hidden"
         )}
       >
         <ProductFullInfo product={product} onSubmit={() => router.back()} />
-      </DialogContent>
-    </Dialog>
+      </Dialog.DialogContent>
+    </Dialog.Dialog>
   );
 };

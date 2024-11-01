@@ -23,3 +23,6 @@ export { ProductMainInfo } from "./product-main-info";
 export { RecommendProducts } from "./recommend-products";
 export { WhiteBlock } from "./white-block";
 export { CheckoutItemDetails } from "./checkout-item-details";
+export { Providers } from "./providers";
+export { ProfileButton } from "./profile-button";
+export { ProfileForm } from "./profile-form";

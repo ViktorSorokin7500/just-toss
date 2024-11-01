@@ -6,6 +6,6 @@ export { Textarea } from "./textarea";
 export { Skeleton } from "./skeleton";
 export { Slider } from "./slider";
 export { Checkbox } from "./checkbox";
-export { Dialog } from "./dialog";
+export * as Dialog from "./dialog";
 export { Drawer } from "./drawer";
 export * as Popover from "./popover";

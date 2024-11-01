@@ -119,9 +119,11 @@ a[x-apple-data-detectors] {
                       <td align="center" style="padding:0;Margin:0;padding-top:10px;padding-bottom:15px"><h1 style="Margin:0;line-height:36px;mso-line-height-rule:exactly;font-family:'trebuchet ms', helvetica, sans-serif;font-size:30px;font-style:normal;font-weight:normal;color:#333333">Thanks for your order<br></h1></td>
                      </tr>
                      <tr style="border-collapse:collapse">
-                      <td align="center" style="Margin:0;padding-top:5px;padding-bottom:5px;padding-left:40px;padding-right:40px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px">To make the payment for the product, please transfer the amount of <b>$${data.totalAmount.toFixed(
-                        2
-                      )}</b> to the card number  <b>4441 1144 8670 2705 </b>.</p></td>
+                      <td align="center" style="Margin:0;padding-top:5px;padding-bottom:5px;padding-left:40px;padding-right:40px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px">To make the payment for the product, please transfer the amount of <b>$${
+                        data.totalAmount > 20
+                          ? data.totalAmount.toFixed(2)
+                          : (data.totalAmount + 2).toFixed(2)
+                      }</b> to the card number  <b>4441 1144 8670 2705 </b>.</p></td>
                      </tr>
                      <tr style="border-collapse:collapse">
                       <td align="center" style="padding:0;Margin:0;padding-bottom:10px;padding-top:15px"><span class="es-button-border" style="border-style:solid;border-color:#2cb543;background:#d48344;border-width:0px;display:inline-block;border-radius:5px;width:auto;border-top:0px solid #2cb543;border-bottom:0px solid #2cb543"><a href="https://justtoss.store/payment?orderId=${

@@ -3,6 +3,7 @@ import * as effects from "./effects";
 import * as types from "./types";
 import * as terpenes from "./terpenes";
 import * as cart from "./cart";
+import * as auth from "./auth";
 
 export const Api = {
   products,
@@ -10,4 +11,5 @@ export const Api = {
   types,
   terpenes,
   cart,
+  auth,
 };
