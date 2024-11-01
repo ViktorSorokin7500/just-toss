@@ -15,7 +15,6 @@ export const ProfileButton: React.FC<Props> = ({
   onClickSignIn,
 }) => {
   const { data: session } = useSession();
-  console.log("ProfileButton session =>", session);
   return (
     <div className={cn(className)}>
       {session ? (
