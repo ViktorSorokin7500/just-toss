@@ -14,7 +14,6 @@ import React from "react";
 import { Button } from "../ui";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { CartDrawerItem } from "./cart-drawer-item";
-import { useCartStore } from "@/store/cart";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { Title } from "./title";

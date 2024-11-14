@@ -9,11 +9,7 @@ import {
 import { Country, State, City } from "country-state-city";
 import { useFormContext } from "react-hook-form";
 
-interface Props {
-  className?: string;
-}
-
-export const CheckoutCountry: React.FC<Props> = ({ className }) => {
+export const CheckoutCountry: React.FC = () => {
   const {
     setValue,
     watch,

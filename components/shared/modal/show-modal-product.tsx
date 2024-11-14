@@ -2,7 +2,6 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Dialog } from "@/components/ui";
-import { DialogContent } from "@/components/ui/dialog";
 import { useRouter } from "next/navigation";
 import { ProductFullInfo } from "../product-full-info";
 

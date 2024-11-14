@@ -1,9 +1,11 @@
 import { authOptions } from "@/constants/auth-options";
 import { prisma } from "@/prisma/prisma-client";
 import { getServerSession } from "next-auth";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
+export const dynamic = "force-dynamic";
+
+export async function GET() {
   try {
     const session = await getServerSession(authOptions);
 

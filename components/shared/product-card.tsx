@@ -39,7 +39,7 @@ export const ProductCard: React.FC<Props> = ({
           <img
             src={imageUrl}
             alt={name}
-            className="size-[215px] rounded-full blur-[8px] grayscale opacity-25"
+            className="size-[215px] rounded-full"
           />
         </div>
 

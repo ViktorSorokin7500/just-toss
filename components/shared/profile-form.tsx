@@ -41,6 +41,7 @@ export const ProfileForm: React.FC<Props> = ({ data }) => {
       toast.success("Profile updated successfully");
     } catch (error) {
       toast.error("Failed to update profile");
+      console.log("profile-form =>", error);
     }
   };
 
