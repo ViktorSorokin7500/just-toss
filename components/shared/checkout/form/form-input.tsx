@@ -1,3 +1,4 @@
+"use client";
 import { Input } from "@/components/ui";
 import { ErrorText } from "./error-text";
 import { X } from "lucide-react";
